@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+        <link href="{{ asset('css/styleLogin.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
@@ -13,7 +18,7 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
+    <div class='log-box'>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputUsername">Username</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
@@ -39,4 +44,5 @@
         Sign in
     </button>
 </form>
+</div>
 {% endblock %}
