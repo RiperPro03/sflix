@@ -21,24 +21,24 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        $response = $this->client->request('GET', 'http://127.0.0.1:8000/search/', [
-            'headers' => [
-                'Accept' => 'application/json',
-            ],
-            'query' => [
-                'query' => 'un avion qui crash sur une île',
-                'top_n' => 20,
-            ],
-        ]);
+        try {
+            $response = $this->client->request('GET', 'http://127.0.0.1:8000/search/', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+                'query' => [
+                    'query' => 'un avion qui crash sur une île',
 
-        $statusCode = $response->getStatusCode();
-        if ($statusCode != 200) {
-            dump("Error occurred with status code: " . $statusCode);
+                ],
+            ]);
+
+            $apiResults = $response->toArray();
+
+            $series = $apiResults['series'];
+        }catch (\Exception $e) {
+            $series = [];
         }
 
-        $apiResults = $response->toArray();
-
-        $series = $apiResults['series'];
 
         return $this->render('home/index.html.twig', [
             'series' => $series,
