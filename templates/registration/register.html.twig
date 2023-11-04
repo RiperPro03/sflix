@@ -3,55 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <div class="flex items-center justify-center min-h-screen bg-gray-100">
-        <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
-            <h3 class="text-2xl font-bold text-center">Register</h3>
-            {{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
 
-            <div>
-                {{ form_label(registrationForm.username) }}
-                {{ form_widget(registrationForm.username, {'attr': {'class': 'block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-red-500'}}) }}
-                <div class="text-red-500 text-xs mt-1">
-                    {{ form_errors(registrationForm.username) }}
-                </div>
-            </div>
-
-            <div>
-                {{ form_label(registrationForm.plainPassword, 'Password') }}
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-red-500'}}) }}
-                <div class="text-red-500 text-xs mt-1">
-                    {{ form_errors(registrationForm.plainPassword) }}
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'w-4 h-4 mt-1 mr-2'}}) }}
-                {{ form_label(registrationForm.agreeTerms) }}
-                <div class="text-red-500 text-xs mt-1">
-                    {{ form_errors(registrationForm.agreeTerms) }}
-                </div>
-            </div>
-
-            <button type="submit" class="w-full px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none">Register</button>
-
-            {{ form_end(registrationForm) }}
-        </div>
-    </div>
-=======
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
->>>>>>> parent of 77c07d6 (creation de fichier de style ,style login register)
 =======
     <h1>Register</h1>
 
