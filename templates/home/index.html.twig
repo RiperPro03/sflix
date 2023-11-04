@@ -3,33 +3,23 @@
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
-    <div class="bg-gray-900 min-h-screen">
-        <header class="container mx-auto px-4 py-8">
-            <!-- Navigation Bar -->
-            <nav class="flex justify-between items-center">
-                <div class="text-3xl text-white font-bold">Sflix</div>
-                <div class="space-x-4">
-                    <input type="search" placeholder="Recherche..." class="px-4 py-2 rounded" />
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded">Se Connecter</button>
-                </div>
-            </nav>
-        </header>
+    
 
-        <!-- Main Content -->
-        <main class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                {% for serie in series %}
-                    {% set image_filename = serie ~ '.jpg' %}
-                    <div class="bg-gray-800 rounded overflow-hidden shadow-lg">
-                        <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie }}" class="w-full">
-                        <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2 text-white">{{ serie | title }}</div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </main>
-    </div>
+    <header>
+        <h1>Sflix</h1>
+        <div class="search">
+            <input type="text" placeholder="Notre Catalogue">
+            <button>🔍</button>
+        </div>
+        <button>Se Connecter</button>
+    </header>
+
+    <main>
+        {% for serie_title in series %}
+            {% set image_filename = serie_title ~ '.jpg' %}
+            <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}" class="poster">
+        {% endfor %}
+    </main>
 
 {% endblock %}
 

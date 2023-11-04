@@ -30,7 +30,7 @@ class Serie
     private $img;
 
     /**
-     * @ORM\ManyToMany(targetEntity=utilisateur::class, inversedBy="series")
+     * @ORM\ManyToMany(targetEntity=Utilisateur::class, inversedBy="series")
      */
     private $utilisateur;
 
@@ -69,14 +69,14 @@ class Serie
     }
 
     /**
-     * @return Collection<int, utilisateur>
+     * @return Collection<int, Utilisateur>
      */
     public function getUtilisateur(): Collection
     {
         return $this->utilisateur;
     }
 
-    public function addUtilisateur(utilisateur $utilisateur): self
+    public function addUtilisateur(Utilisateur $utilisateur): self
     {
         if (!$this->utilisateur->contains($utilisateur)) {
             $this->utilisateur[] = $utilisateur;
@@ -85,7 +85,7 @@ class Serie
         return $this;
     }
 
-    public function removeUtilisateur(utilisateur $utilisateur): self
+    public function removeUtilisateur(Utilisateur $utilisateur): self
     {
         $this->utilisateur->removeElement($utilisateur);
 

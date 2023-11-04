@@ -1,6 +1,9 @@
-<<<<<<< HEAD
-=======
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+        <link href="{{ asset('css/styleLogin.css') }}" rel="stylesheet" />
+{% endblock %}
+
 
 {% block title %}Log in!{% endblock %}
 
@@ -15,7 +18,7 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
+    <div class='log-box'>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputUsername">Username</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
@@ -25,7 +28,6 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
->>>>>>> parent of 77c07d6 (creation de fichier de style ,style login register)
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -38,3 +40,9 @@
         </div>
     #}
 
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+</div>
+{% endblock %}

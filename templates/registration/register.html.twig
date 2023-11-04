@@ -1,22 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('css/styleLogin.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    <div class='log-box regis'>
+        <h1>Register</h1>
+        <div class='truc'>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username) }}
 
-=======
-    <h1>Register</h1>
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            
+            {{ form_row(registrationForm.agreeTerms) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
->>>>>>> parent of 77c07d6 (creation de fichier de style ,style login register)
+            <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}
-
-
