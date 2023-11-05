@@ -32,11 +32,11 @@ class Serie
     /**
      * @ORM\ManyToMany(targetEntity=Utilisateur::class, inversedBy="series")
      */
-    private $utilisateur;
+    private $utilisateurs;
 
     public function __construct()
     {
-        $this->utilisateur = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,15 +71,16 @@ class Serie
     /**
      * @return Collection<int, Utilisateur>
      */
-    public function getUtilisateur(): Collection
+    public function getUtilisateurs(): Collection
     {
-        return $this->utilisateur;
+        return $this->utilisateurs;
     }
 
     public function addUtilisateur(Utilisateur $utilisateur): self
     {
-        if (!$this->utilisateur->contains($utilisateur)) {
-            $this->utilisateur[] = $utilisateur;
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs[] = $utilisateur;
+            $utilisateur->addSeries($this); // Make sure the addSerie method exists in Utilisateur and properly adds the Serie to the collection
         }
 
         return $this;
@@ -87,8 +88,15 @@ class Serie
 
     public function removeUtilisateur(Utilisateur $utilisateur): self
     {
-        $this->utilisateur->removeElement($utilisateur);
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            $utilisateur->removeSeries($this); // Make sure the removeSerie method exists in Utilisateur and properly removes the Serie from the collection
+        }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

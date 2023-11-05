@@ -1,0 +1,65 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-stats">
+        <div class="stat-cards">
+            <h1>Statistiques du Dashboard</h1>
+            <div class="stat-card">
+                <div class="stat-card__title">Total d'utilisateurs</div>
+                <div class="stat-card__number">{{ totalUsers }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card__title">Total de séries</div>
+                <div class="stat-card__number">{{ totalSeries }}</div>
+            </div>
+        </div>
+
+        <div class="charts">
+            <!-- Ici, vous pourrez insérer des graphiques dynamiques -->
+        </div>
+
+        <h2>Nombre de séries aimées par utilisateur</h2>
+        <table class="table">
+            <thead class="thead">
+            <tr>
+                <th>Utilisateur</th>
+                <th>Nombre de séries aimées</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for userStat in seriesPerUser %}
+                <tr>
+                    <td>{{ userStat.username|default('Non disponible') }}</td>
+                    <td>{{ userStat.seriesCount|default('Non disponible') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="top-series">
+            <h2>Top 10 des séries les plus aimées</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Série</th>
+                    <th>Nombre de Likes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for serie in topSeries %}
+                    <tr>
+                        <td>{{ serie.title }}</td>
+                        <td>{{ serie.likesCount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/adminDashboard.css') }}">
+{% endblock %}
+

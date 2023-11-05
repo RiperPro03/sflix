@@ -40,7 +40,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Serie::class, mappedBy="Utilisateur")
+     * @ORM\ManyToMany(targetEntity=Serie::class, mappedBy="utilisateurs")
      */
     private $series;
 
@@ -158,5 +158,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->username;
     }
 }
