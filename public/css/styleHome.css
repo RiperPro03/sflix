@@ -10,13 +10,15 @@ header {
 }
 
 
-header h1{
+header a{
     font-size: 24px;
     margin:0px;
     font-family:Helvetica, sans-serif;
     font-weight: 600;
     letter-spacing: .6px;
     padding: 10px;
+    text-decoration: none;
+    color: white;
 }
 
 
@@ -112,21 +114,59 @@ main {
 .image-poster img{
     height: 206px;
     width: 146px;
-    
-}
-.image-poster{
     z-index:0;
-
+    transition: transform 0.3s;
 }
+
 
 .hover-serie{   
     height: 206px;
     width: 146px;
-    background-color: #0a84ff;
+    position: absolute;
+    background-color: #8e8e8e;
+    color: black;
+    z-index:1;
+    top:0px;
+    opacity: 0;
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    transition: 0.3s;
+}
+
+.poster:hover .image-poster img {
+    transform: scale(1.2);
+    z-index: 1;
+}
+
+.hover-serie:hover {
+    transform: scale(1.2);
+    opacity: 0.2;
+}
+
+
+.coeur img{
+    height: 50px;
+    width: 50px;
+    fill: green;
+}
+.coeur{   
+    height: 206px;
+    width: 146px;
+    background-color: #8e8e8e;
     position: absolute;
     z-index:1;
     top:0px;
+    opacity: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;    
+    transition: 0.3s;
+    color: black;
 }
-.hover-serie:hover{
-    opacity: .5;
+
+.coeur:hover {
+    transform: scale(1.2);
+    opacity: 0.2;
 }
+

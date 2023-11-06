@@ -12,7 +12,7 @@
     
 
     <header>
-        <h1>SFLIX</h1>
+        <a href="{{path('app_home') }}">SFLIX</a>
         <div class="left-side">
             {% if app.user %}
                 <div class="menu">
@@ -20,13 +20,12 @@
                     <a href="">Une autre page</a>
                     <a href="">Une Troisieme</a>
                 </div>
-            {% endif %}
-            <div class="button-connect">
-                <a href="{{path('app_login') }}">Se Connecter</a>
-            </div>
-            {% if app.user %}
                 <div class="logged-in">
                     <a href="{{path('app_login') }}">{{ app.user.userIdentifier }}</a>
+                </div>
+            {% else %}
+                <div class="button-connect">
+                    <a href="{{path('app_login') }}">Se Connecter</a>
                 </div>
             {% endif %}
         </div>
@@ -45,9 +44,17 @@
                 <div class='image-poster'>
                     <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}">
                 </div>
-                <div class="hover-serie"> 
-                    <p>{{ serie_title }}</p>
-                </div>
+                
+                    {% if app.user %}
+                        <div class="hover-serie"> 
+                            <p>{{ serie_title |upper }}</p>
+                        </div> 
+                    {% else %}
+                        <div class="coeur">
+                            <img src="{{asset('img-icons/heart.svg') }}">
+                            <p>{{ serie_title |upper }}</p>
+                        </div>
+                    {% endif %}
             </div>
         {% endfor %}
     </main>
