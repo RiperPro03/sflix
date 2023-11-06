@@ -1,23 +1,54 @@
 {% extends 'base.html.twig' %}
 
+
+ {% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/styleHome.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
     
 
     <header>
-        <h1>Sflix</h1>
-        <div class="search">
-            <input type="text" placeholder="Notre Catalogue">
-            <button>🔍</button>
+        <h1>SFLIX</h1>
+        <div class="left-side">
+            {% if app.user %}
+                <div class="menu">
+                    <a href="">Mes Series</a>
+                    <a href="">Une autre page</a>
+                    <a href="">Une Troisieme</a>
+                </div>
+            {% endif %}
+            <div class="button-connect">
+                <a href="{{path('app_login') }}">Se Connecter</a>
+            </div>
+            {% if app.user %}
+                <div class="logged-in">
+                    <a href="{{path('app_login') }}">{{ app.user.userIdentifier }}</a>
+                </div>
+            {% endif %}
         </div>
-        <button>Se Connecter</button>
     </header>
+
+    <h2>Notre Catalogue </h2>
+    <div class="search">
+                <input type="text" placeholder="Rechercher">
+                <button>🔍</button>
+    </div>
 
     <main>
         {% for serie_title in series %}
             {% set image_filename = serie_title ~ '.jpg' %}
-            <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}" class="poster">
+            <div class="poster">
+                <div class='image-poster'>
+                    <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}">
+                </div>
+                <div class="hover-serie"> 
+                    <p>{{ serie_title }}</p>
+                </div>
+            </div>
         {% endfor %}
     </main>
 

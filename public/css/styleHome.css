@@ -1,0 +1,132 @@
+
+header {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 20px;
+    background-color: black;
+}
+
+
+header h1{
+    font-size: 24px;
+    margin:0px;
+    font-family:Helvetica, sans-serif;
+    font-weight: 600;
+    letter-spacing: .6px;
+    padding: 10px;
+}
+
+
+.left-side{
+    display: flex;
+}
+.menu {
+    padding-right: 20px;
+}
+.button-connect{
+    padding-left: 20px;
+}
+
+.menu a{
+    color :#b7b7b7;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+
+.menu a:hover{
+
+    box-shadow:0px 0px 0px 1px #b7b7b7 inset;
+}
+
+
+.button-connect a{
+    background-color:#0a84ff;
+    color: white;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+
+.button-connect a:hover{
+    background-color:transparent;
+    box-shadow:0px 0px 0px 1px #0a84ff inset;
+    cursor: pointer;
+}
+
+.logged-in a{
+    background-color:#4d4d4d;
+    color: white;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+.logged-in a:hover{
+    background-color:transparent;
+    box-shadow:0px 0px 0px 1px #3e3e3f inset;
+    cursor: pointer;
+}
+.search input{
+    padding: 4px;
+    border : none;
+    border-radius: 4px;
+    font-size: 12px;  
+    background-color: white;
+    color: black;
+}
+.search input:focus {
+    outline:  none;
+}
+
+
+main {
+    max-width: 90%;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    gap: 20px;
+}
+
+.poster{
+    position: relative;
+}
+.image-poster img{
+    height: 206px;
+    width: 146px;
+    
+}
+.image-poster{
+    z-index:0;
+
+}
+
+.hover-serie{   
+    height: 206px;
+    width: 146px;
+    background-color: #0a84ff;
+    position: absolute;
+    z-index:1;
+    top:0px;
+}
+.hover-serie:hover{
+    opacity: .5;
+}

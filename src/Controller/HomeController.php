@@ -39,7 +39,7 @@ class HomeController extends AbstractController
             $series = [];
         }
 
-
+        $series = ['desperate housewives','24','90210','alias','angels','blades','caprica','buffy','chuck','24','90210','alias','angels','blades','caprica','buffy','chuck'];
         return $this->render('home/index.html.twig', [
             'series' => $series,
         ]);

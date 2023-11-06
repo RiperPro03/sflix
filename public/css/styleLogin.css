@@ -1,19 +1,19 @@
 body {
     font-family: Roboto,Helvetica, sans-serif;
-    background-color: #2d2c59;
+    background-color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 h1{
-    color: #fef67f;
+    color: white;
     font-size: 30px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
 
 .log-box{
-    background-color:#101026;
+    background-color:black;
     color: f7f6f6;
     margin-top: 60px;
     padding: 60px 68px 68px;
@@ -43,12 +43,12 @@ h1{
 
 .log-box input:focus {
     outline:  none;
-    background-color: #dacafb;
+    background-color:white ;
 }
 
 .btn {
-    background: #fef67f;
-    color: #2d2c59;
+    background: #0a84ff;
+    color: white;
     border-radius: 4px;
     margin-top: 36px;
     font-size: 20px;
