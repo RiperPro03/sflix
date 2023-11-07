@@ -1,6 +1,6 @@
 body {
     font-family: Roboto,Helvetica, sans-serif;
-    background-color: #111;
+    background-color: #777676;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +10,10 @@ h1{
     font-size: 30px;
     margin-bottom: 0px;
     margin-top: 0px;
+}
+
+.regis{
+    margin-bottom: 20px;
 }
 
 .log-box{
@@ -50,7 +54,7 @@ h1{
     background: #0a84ff;
     color: white;
     border-radius: 4px;
-    margin-top: 36px;
+    margin-top: 26px;
     font-size: 20px;
     max-width: 100%;
     width: 100%;
@@ -60,3 +64,43 @@ h1{
     letter-spacing: .1px;
 }
 
+.alert p{
+    margin-top: 14px;
+    color: #000000;
+    background-color: #f3c3c7;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 12px;
+
+}
+
+.username{
+    display: flex;
+    width: 100%;
+    padding-bottom: 4px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+.password{
+    display: flex;
+    width: 100%;
+    padding-bottom: 4px;
+    margin-top: 6px;
+}
+
+.agree{
+    margin-top: 20px;
+}
+
+.log-box ul{
+    list-style-type: none;
+    color: #000000;
+    background-color: #f3c3c7;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 10;
+    width: 100%;
+
+}

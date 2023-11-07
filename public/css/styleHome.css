@@ -86,6 +86,26 @@ header a{
     box-shadow:0px 0px 0px 1px #3e3e3f inset;
     cursor: pointer;
 }
+.logged-in{
+    position: relative;
+    display: inline-block;
+    
+}
+
+.deconnecter{
+    
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.logged-in:hover .deconnecter{
+    display: block;
+    width: 100px;
+    
+}
+
 .search input{
     padding: 4px;
     border : none;

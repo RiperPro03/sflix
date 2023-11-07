@@ -21,7 +21,10 @@
                     <a href="">Une Troisieme</a>
                 </div>
                 <div class="logged-in">
-                    <a href="{{path('app_login') }}">{{ app.user.userIdentifier }}</a>
+                    <a>{{ app.user.userIdentifier }}</a>
+                    <div class="deconnecter">
+                        <a href="{{path('app_logout') }}">Se Deconnecter</a>
+                    </div>
                 </div>
             {% else %}
                 <div class="button-connect">

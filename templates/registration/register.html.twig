@@ -7,17 +7,22 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class='log-box regis'>
-        <h1>Register</h1>
-        <div class='truc'>
+    <div class='log-box'>
+        <h1 class="regis">Register</h1>
+
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.username ,{
+                attr: {'class': 'username'}
+            }) }}
 
             {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
+                label: 'Password',
+                attr: {'class': 'password'}
             }) }}
             
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.agreeTerms,{
+                attr: {'class': 'agree'}
+            }) }}
 
             <button type="submit" class="btn">Register</button>
         {{ form_end(registrationForm) }}
