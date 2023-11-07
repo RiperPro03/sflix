@@ -6,6 +6,10 @@
     <link href="{{ asset('css/styleHome.css') }}" rel="stylesheet" />
 {% endblock %}
 
+{% block javascripts %}
+     <link href="{{ asset('js/scriptHome.js') }}" rel="javascript"/>
+{% endblock %}
+
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
@@ -17,14 +21,12 @@
             {% if app.user %}
                 <div class="menu">
                     <a href="">Mes Series</a>
-                    <a href="">Une autre page</a>
-                    <a href="">Une Troisieme</a>
                 </div>
                 <div class="logged-in">
                     <a>{{ app.user.userIdentifier }}</a>
-                    <div class="deconnecter">
-                        <a href="{{path('app_logout') }}">Se Deconnecter</a>
-                    </div>
+                </div>
+                <div class="menu deco">
+                    <a href="{{path('app_logout') }}">Se Deconnecter</a>
                 </div>
             {% else %}
                 <div class="button-connect">
@@ -46,18 +48,15 @@
             <div class="poster">
                 <div class='image-poster'>
                     <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}">
-                </div>
-                
+                    <div class="nom-serie">
+                        <p>{{ serie_title |upper }}</p>
+                    </div>
                     {% if app.user %}
-                        <div class="hover-serie"> 
-                            <p>{{ serie_title |upper }}</p>
-                        </div> 
-                    {% else %}
                         <div class="coeur">
-                            <img src="{{asset('img-icons/heart.svg') }}">
-                            <p>{{ serie_title |upper }}</p>
+                            <img id="heart" onclick="like_serie()" src="{{asset('img-icons/heart.svg') }}">
                         </div>
                     {% endif %}
+                </div>
             </div>
         {% endfor %}
     </main>
