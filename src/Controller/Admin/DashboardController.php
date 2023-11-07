@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
         $totalUsers = $em->getRepository(Utilisateur::class)->count([]);
         $totalSeries = $em->getRepository(Serie::class)->count([]);
 
-        // Get the number of series liked by each user
+        // Get le nombre de series aimées pour chaque utilisateur
         $usersWithSeriesCount = $em->createQuery(
             'SELECT u.username, COUNT(s.id) as seriesCount
             FROM App\Entity\Utilisateur u
@@ -30,6 +30,7 @@ class DashboardController extends AbstractDashboardController
             GROUP BY u.id'
         )->getResult();
 
+        // Get les 10 series les plus aimées
         $topSeries = $em->createQuery(
             'SELECT s.title, COUNT(u.id) as likesCount
                 FROM App\Entity\Serie s
@@ -58,6 +59,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('Series', 'fas fa-list', Serie::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
