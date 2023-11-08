@@ -13,7 +13,7 @@ class FavoriteController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('favorite.html.twig', [
+        return $this->render('favorite/favorite.html.twig', [
             'controller_name' => 'FavoriteController',
         ]);
     }
@@ -23,7 +23,7 @@ class FavoriteController extends AbstractController
      */
     public function suggestion(): Response
     {
-        return $this->render('suggestion.html.twig', [
+        return $this->render('favorite/suggestion.html.twig', [
             'controller_name' => 'FavoriteController',
         ]);
     }
