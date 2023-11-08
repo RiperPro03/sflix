@@ -1,47 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-        <link href="{{ asset('css/styleLogin.css') }}" rel="stylesheet" />
-{% endblock %}
-
 
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    <div class='log-box'>
-        <h1>Please sign in</h1>
+    <form method="post" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Please Sign In</h2>
 
-        <label for="inputUsername">Username</label>
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                        <div class="mb-3">
+                            <label for="inputUsername" class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" autocomplete="username" required autofocus>
+                            </div>
+                        </div>
 
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                            </div>
+                        </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+                        {#Uncomment this section for remember me functionality
+                        <div class="mb-3 form-check">
+                          <input type="checkbox" name="_remember_me" id="rememberMe" class="form-check-input">
+                          <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                         #}
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+                        </div>
+
+                        {% if error %}
+                            <div class="alert alert-danger mt-3">
+                                <p>La connexion a échoué, veuillez réessayer</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-    
-    {% if error %}
-        <div class="alert alert-danger">
-            <p>La connexion a échoué, veuillez réessayer</p>
-        </div>
-    {% endif %}
-</form>
-</div>
+    </form>
 {% endblock %}

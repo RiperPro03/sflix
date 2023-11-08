@@ -1,31 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('css/styleLogin.css') }}" rel="stylesheet" />
-{% endblock %}
-
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class='log-box'>
-        <h1 class="regis">Register</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Register</h1>
+                        {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
 
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username ,{
-                attr: {'class': 'username'}
-            }) }}
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.username) }}
+                            {{ form_widget(registrationForm.username, {
+                                attr: {
+                                    'class': 'form-control' ~ (registrationForm.username.vars.errors ? ' is-invalid' : ''),
+                                    'autocomplete': 'off'
+                                }
+                            }) }}
+                            {% if registrationForm.username.vars.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(registrationForm.username) }}
+                                </div>
+                            {% endif %}
+                        </div>
 
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password',
-                attr: {'class': 'password'}
-            }) }}
-            
-            {{ form_row(registrationForm.agreeTerms,{
-                attr: {'class': 'agree'}
-            }) }}
 
-            <button type="submit" class="btn">Register</button>
-        {{ form_end(registrationForm) }}
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.plainPassword, 'Password') }}
+                            {{ form_widget(registrationForm.plainPassword, {
+                                attr: {'class': 'form-control' ~ (form_errors(registrationForm.plainPassword) ? ' is-invalid' : '')}
+                            }) }}
+                            {% if registrationForm.plainPassword.vars.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(registrationForm.plainPassword) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            {{ form_widget(registrationForm.agreeTerms, {
+                                attr: {'class': 'form-check-input' ~ (form_errors(registrationForm.agreeTerms) ? ' is-invalid' : '')}
+                            }) }}
+                            {{ form_label(registrationForm.agreeTerms) }}
+                            {% if registrationForm.agreeTerms.vars.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(registrationForm.agreeTerms) }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Register</button>
+
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

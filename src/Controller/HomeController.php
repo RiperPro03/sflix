@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Serie;
+use App\Entity\Utilisateur;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,9 +39,11 @@ class HomeController extends AbstractController
             $series = [];
         }
 
-//        $series = ['desperate housewives','24','90210','alias','angels','blades','caprica','buffy','chuck','24','90210','alias','angels','blades','caprica','buffy','chuck'];
+        $likedSeries = $this->getLikedSeries();
+
         return $this->render('home/index.html.twig', [
             'series' => $series,
+            'likedSeries' => $likedSeries,
         ]);
     }
 
@@ -69,8 +74,71 @@ class HomeController extends AbstractController
             }
         }
 
+        $likedSeries = $this->getLikedSeries();
+
         return $this->render('home/index.html.twig', [
             'series' => $series,
+            'likedSeries' => $likedSeries,
         ]);
     }
+
+    /**
+     * @Route("/toggle-like/{title}", name="app_toggle_like", methods={"POST"})
+     */
+    public function toggleLike(string $title, EntityManagerInterface $em): Response
+    {
+        /** @var Utilisateur $user */
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json(['success' => false, 'message' => 'User not authenticated']);
+        }
+
+        // Check if the Serie exists by title
+        $serieRepository = $em->getRepository(Serie::class);
+        $serie = $serieRepository->findOneBy(['title' => $title]);
+
+        // If Serie does not exist, create a new one
+        if (!$serie) {
+            $serie = new Serie();
+            $serie->setTitle($title);
+            $serie->setImg('img-series/' . urlencode($title) . '.jpg');
+            $em->persist($serie);
+        }
+
+        // Toggle like or dislike
+        if ($user->getSeries()->contains($serie)) {
+            $user->removeSeries($serie);
+            $liked = false;
+        } else {
+            $user->addSeries($serie);
+            $liked = true;
+        }
+
+        // Save the changes to the database
+        $em->flush();
+
+        return $this->json(['success' => true, 'liked' => $liked]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getLikedSeries(): array
+    {
+        $user = $this->getUser();
+        $likedSeries = [];
+
+        if ($user) {
+            $likedSeriesTitles = $user->getSeries()->map(function ($serie) {
+                return json_decode('"' . $serie->getTitle() . '"');
+            })->toArray();
+
+            foreach ($likedSeriesTitles as $title) {
+                $likedSeries[$title] = true;
+            }
+        }
+        return $likedSeries;
+    }
+
 }

@@ -1,65 +1,125 @@
 {% extends 'base.html.twig' %}
 
-
- {% block stylesheets %}
+{% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/styleHome.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block javascripts %}
-     <link href="{{ asset('js/scriptHome.js') }}" rel="javascript"/>
+    {{ parent() }}
+    <script>
+        function like_serie(title, button) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Send a POST request to the server
+            fetch('/toggle-like/' + encodeURIComponent(title), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({ title: title })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        let heartIconPath = data.liked ? 'img-icons/heart-fill.svg' : 'img-icons/heart.svg';
+                        button.querySelector('.heart-icon').setAttribute('src', heartIconPath);
+                    } else {
+                        console.error(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
+
+        // Attach the like_serie function to all buttons with the like-button class
+        document.querySelectorAll('.like-button').forEach(button => {
+            button.addEventListener('click', function() {
+                like_serie(this.dataset.title, this);
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
-    
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_home') }}">SFLIX</a>
+            <div class="d-flex align-items-center">
+                {% if app.user %}
+                    <div class="nav-item">
+                        <a class="btn btn-outline" href="{{ path('app_home') }}">Mes Series</a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ app.user.userIdentifier }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ path('admin') }}">Administration</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+                        </ul>
+                    </div>
 
-    <header>
-        <a href="{{path('app_home') }}">SFLIX</a>
-        <div class="left-side">
-            {% if app.user %}
-                <div class="menu">
-                    <a href="">Mes Series</a>
-                </div>
-                <div class="logged-in">
-                    <a>{{ app.user.userIdentifier }}</a>
-                </div>
-                <div class="menu deco">
-                    <a href="{{path('app_logout') }}">Se Deconnecter</a>
-                </div>
-            {% else %}
-                <div class="button-connect">
-                    <a href="{{path('app_login') }}">Se Connecter</a>
-                </div>
-            {% endif %}
+                {% else %}
+                    <div class="nav-item">
+                        <a class="btn btn-outline-primary" href="{{ path('app_login') }}">Se Connecter</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </header>
 
-    <h2>Notre Catalogue </h2>
-    <div class="search">
-                <input type="text" placeholder="Rechercher">
-                <button>🔍</button>
-    </div>
-
-    <main>
-        {% for serie_title in series %}
-            {% set image_filename = serie_title ~ '.jpg' %}
-            <div class="poster">
-                <div class='image-poster'>
-                    <img src="{{ asset('img-series/' ~ image_filename) }}" alt="{{ serie_title }}">
-                    <div class="nom-serie">
-                        <p>{{ serie_title |upper }}</p>
-                    </div>
-                    {% if app.user %}
-                        <div class="coeur">
-                            <img id="heart" onclick="like_serie()" src="{{asset('img-icons/heart.svg') }}">
-                        </div>
-                    {% endif %}
-                </div>
+    <div class="container mt-4">
+        <h2>Notre Catalogue</h2>
+        <form action="/search" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" name="query" autocomplete="off" value="{{ app.request.query.get('query', '') }}">
+                <button class="btn btn-outline-secondary" type="submit">🔍</button>
             </div>
-        {% endfor %}
-    </main>
+        </form>
+
+        <div class="row">
+            {% if series is empty %}
+                <div class="col-12">
+                    <div class="alert alert-info" role="alert">
+                        Aucun résultat trouvé pour cette recherche.
+                    </div>
+                </div>
+            {% else %}
+                {% for serie_title in series %}
+                    {% set image_filename = serie_title ~ '.jpg' %}
+                    {% set isLiked = likedSeries[serie_title] ?? false %}
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="image-container position-relative">
+                                <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
+                                {% if app.user %}
+                                    <button class="overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center like-button" data-title="{{ serie_title | e('js') }}" data-liked="{{ isLiked ? 'true' : 'false' }}">
+                                        <img src="{{ asset(isLiked ? 'img-icons/heart-fill.svg' : 'img-icons/heart.svg') }}" alt="Like" class="heart-icon">
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">{{ serie_title }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
 
