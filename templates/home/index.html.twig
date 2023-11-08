@@ -9,10 +9,9 @@
     {{ parent() }}
     <script>
         function like_serie(title, button) {
-            // Prevent default form submission
             event.preventDefault();
 
-            // Send a POST request to the server
+            // Send a POST request
             fetch('/toggle-like/' + encodeURIComponent(title), {
                 method: 'POST',
                 headers: {
@@ -40,7 +39,6 @@
                 });
         }
 
-        // Attach the like_serie function to all buttons with the like-button class
         document.querySelectorAll('.like-button').forEach(button => {
             button.addEventListener('click', function() {
                 like_serie(this.dataset.title, this);
@@ -82,7 +80,7 @@
     </header>
 
     <div class="container mt-4">
-        <h2>Notre Catalogue</h2>
+        <h2>Notre Catalogue <small>({{ series|length }})</small></h2>
         <form action="/search" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" name="query" autocomplete="off" value="{{ app.request.query.get('query', '') }}">
