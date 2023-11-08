@@ -87,8 +87,10 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" name="query" autocomplete="off" value="{{ app.request.query.get('query', '') }}">
                 <button class="btn btn-outline-secondary" type="submit">🔍</button>
+                <a class="btn btn-outline-danger" href="{{ path('app_home') }}" role="button">Reset</a>
             </div>
         </form>
+
 
         <div class="row">
             {% if series is empty %}
