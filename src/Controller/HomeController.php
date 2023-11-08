@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Serie;
-use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -87,18 +86,16 @@ class HomeController extends AbstractController
      */
     public function toggleLike(string $title, EntityManagerInterface $em): Response
     {
-        /** @var Utilisateur $user */
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->json(['success' => false, 'message' => 'User not authenticated']);
+            return $this->json(['success' => false, 'message' => 'Utilisateur non connecté']);
         }
 
-        // Check if the Serie exists by title
         $serieRepository = $em->getRepository(Serie::class);
         $serie = $serieRepository->findOneBy(['title' => $title]);
 
-        // If Serie does not exist, create a new one
+        // Création de la série si elle n'existe pas
         if (!$serie) {
             $serie = new Serie();
             $serie->setTitle($title);
@@ -106,7 +103,7 @@ class HomeController extends AbstractController
             $em->persist($serie);
         }
 
-        // Toggle like or dislike
+        // Toggle like ou dislike
         if ($user->getSeries()->contains($serie)) {
             $user->removeSeries($serie);
             $liked = false;
@@ -114,8 +111,7 @@ class HomeController extends AbstractController
             $user->addSeries($serie);
             $liked = true;
         }
-
-        // Save the changes to the database
+        // Sauvegarde en base de données
         $em->flush();
 
         return $this->json(['success' => true, 'liked' => $liked]);
