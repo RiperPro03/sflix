@@ -63,7 +63,7 @@ class HomeController extends AbstractController
                         'Accept' => 'application/json',
                     ],
                     'query' => [
-                        'query' => $searchQuery, // Utilise le paramètre de recherche récupéré de la requête
+                        'query' => $searchQuery,
                     ],
                 ]);
 

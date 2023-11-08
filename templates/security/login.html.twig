@@ -4,13 +4,42 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_home') }}">SFLIX</a>
+            <div class="d-flex align-items-center">
+                <div class="nav-item">
+                    <a class="btn btn-outline-primary" href="{{ path('app_home') }}">Home</a>
+                </div>
+                {% if app.user %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ app.user.userIdentifier }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ path('admin') }}">Administration</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+
     <form method="post" class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Please Sign In</h2>
-
+                        <h2 class="card-title text-center mb-4">Connexion</h2>
+                        {% if app.user %}
+                            <div class="alert alert-success">
+                                <p>Vous êtes déjà connecté</p>
+                            </div>
+                        {% endif %}
                         <div class="mb-3">
                             <label for="inputUsername" class="form-label">Username</label>
                             <div class="input-group">
@@ -29,13 +58,6 @@
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                        {#Uncomment this section for remember me functionality
-                        <div class="mb-3 form-check">
-                          <input type="checkbox" name="_remember_me" id="rememberMe" class="form-check-input">
-                          <label class="form-check-label" for="rememberMe">Remember me</label>
-                        </div>
-                         #}
-
                         <div class="d-grid gap-2">
                             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
                         </div>
@@ -45,6 +67,10 @@
                                 <p>La connexion a échoué, veuillez réessayer</p>
                             </div>
                         {% endif %}
+
+                        <div class="mt-4 text-center">
+                            <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Inscription ici</a>.</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,19 +3,49 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_home') }}">SFLIX</a>
+            <div class="d-flex align-items-center">
+                <div class="nav-item">
+                    <a class="btn btn-outline-primary" href="{{ path('app_home') }}">Home</a>
+                </div>
+                {% if app.user %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ app.user.userIdentifier }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ path('admin') }}">Administration</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se Déconnecter</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card mt-5">
                     <div class="card-body">
-                        <h1 class="card-title text-center mb-4">Register</h1>
+                        <h1 class="card-title text-center mb-4">Inscription</h1>
+                        {% if app.user %}
+                            <div class="alert alert-success">
+                                <p>Vous êtes déjà connecté</p>
+                            </div>
+                        {% endif %}
                         {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
 
                         <div class="mb-3">
                             {{ form_label(registrationForm.username) }}
                             {{ form_widget(registrationForm.username, {
                                 attr: {
-                                    'class': 'form-control' ~ (registrationForm.username.vars.errors ? ' is-invalid' : ''),
+                                    'class': 'form-control' ~ (form_errors(registrationForm.username) ? ' is-invalid' : ''),
                                     'autocomplete': 'off'
                                 }
                             }) }}
@@ -51,7 +81,13 @@
                             {% endif %}
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-lg btn-primary" type="submit">S'inscrire</button>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connexion ici</a>.</p>
+                        </div>
 
                         {{ form_end(registrationForm) }}
                     </div>

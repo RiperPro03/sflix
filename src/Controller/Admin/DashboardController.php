@@ -40,6 +40,10 @@ class DashboardController extends AbstractDashboardController
             )->setMaxResults(10)
             ->getResult();
 
+        foreach ($topSeries as $key => $serie) {
+            $topSeries[$key]['title'] = json_decode('"' . $serie['title'] . '"');
+        }
+
         return $this->render('admin/dashboard.html.twig', [
             'totalUsers' => $totalUsers,
             'totalSeries' => $totalSeries,
@@ -59,5 +63,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('Series', 'fas fa-list', Serie::class);
+        yield MenuItem::linkToRoute('Retour au site', 'fas fa-home', 'app_home');
     }
 }
