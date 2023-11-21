@@ -37,7 +37,7 @@
 
     <div class="container mt-4">
         <div class="row">
-            {% if likedSeries is empty %}
+            {% if likedSeriesTitles is empty %}
                 <div class="col-12">
                     <div class="alert alert-info" role="alert">
                        Vous n'avez mis aucune serie en favoris.
@@ -45,19 +45,13 @@
                     </div>
                 </div>
             {% else %}
-            <h2>Vos Séries Favorite <small>({{ likedSeries|length }})</small></h2>
-                {% for serie_title in likedSeries %}
+                <h2>Vos Séries Favorite <small>({{ likedSeriesTitles|length }})</small></h2>
+                {% for serie_title in likedSeriesTitles %}
                     {% set image_filename = serie_title ~ '.jpg' %}
-                    {% set isLiked = likedSeries[serie_title] ?? false %}
                     <div class="col-md-3 col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
-                                {% if app.user %}
-                                    <button class="overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center like-button" data-title="{{ serie_title | e('js') }}" data-liked="{{ isLiked ? 'true' : 'false' }}">
-                                        <img src="{{ asset(isLiked ? 'img-icons/heart-fill.svg' : 'img-icons/heart.svg') }}" alt="Like" class="heart-icon">
-                                    </button>
-                                {% endif %}
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">{{ serie_title }}</h5>

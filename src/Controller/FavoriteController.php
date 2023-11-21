@@ -13,8 +13,22 @@ class FavoriteController extends AbstractController
      */
     public function index(): Response
     {
+
+        $user = $this->getUser();
+        $likedSeries = [];
+
+        if ($user) {
+            $likedSeriesTitles = $user->getSeries()->map(function ($serie) {
+                return json_decode('"' . $serie->getTitle() . '"');
+            })->toArray();
+
+        } else {
+            $likedSeriesTitles = [];
+        }
+
         return $this->render('favorite/favorite.html.twig', [
             'controller_name' => 'FavoriteController',
+            'likedSeriesTitles' => $likedSeriesTitles,
         ]);
     }
 
