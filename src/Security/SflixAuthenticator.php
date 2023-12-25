@@ -51,8 +51,6 @@ class SflixAuthenticator extends AbstractLoginFormAuthenticator
 
 
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

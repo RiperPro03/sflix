@@ -15,20 +15,22 @@ class FavoriteController extends AbstractController
     {
 
         $user = $this->getUser();
-        $likedSeries = [];
 
         if ($user) {
-            $likedSeriesTitles = $user->getSeries()->map(function ($serie) {
-                return json_decode('"' . $serie->getTitle() . '"');
+            $likedSeries = $user->getSeries()->map(function ($serie) {
+                return [
+                    'title' => json_decode('"' . $serie->getTitle() . '"'),
+                    'img' => str_replace('\u0020', ' ', urldecode($serie->getImg()))
+                ];
             })->toArray();
 
         } else {
-            $likedSeriesTitles = [];
+            $likedSeries = [];
         }
 
         return $this->render('favorite/favorite.html.twig', [
             'controller_name' => 'FavoriteController',
-            'likedSeriesTitles' => $likedSeriesTitles,
+            'likedSeries' => $likedSeries,
         ]);
     }
 

@@ -5,48 +5,6 @@
     <link href="{{ asset('css/styleHome.css') }}" rel="stylesheet" />
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        function like_serie(title, button) {
-            event.preventDefault();
-
-            // Send a POST request
-            fetch('/toggle-like/' + encodeURIComponent(title), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({ title: title })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        let heartIconPath = data.liked ? 'img-icons/heart-fill.svg' : 'img-icons/heart.svg';
-                        button.querySelector('.heart-icon').setAttribute('src', heartIconPath);
-                    } else {
-                        console.error(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
-        }
-
-        document.querySelectorAll('.like-button').forEach(button => {
-            button.addEventListener('click', function() {
-                like_serie(this.dataset.title, this);
-            });
-        });
-    </script>
-{% endblock %}
-
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
@@ -62,7 +20,7 @@
                         <a class="btn btn-outline-primary" href="{{ path('app_favorite') }}">Mes Series</a>
                     </div>
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn btn-outline-primary dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ app.user.userIdentifier }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -109,7 +67,7 @@
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
                                 {% if app.user %}
-                                    <button class="overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center like-button" data-title="{{ serie_title | e('js') }}" data-liked="{{ isLiked ? 'true' : 'false' }}">
+                                    <button class="overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center like-button" data-title="{{ serie_title }}" data-liked="{{ isLiked ? 'true' : 'false' }}">
                                         <img src="{{ asset(isLiked ? 'img-icons/heart-fill.svg' : 'img-icons/heart.svg') }}" alt="Like" class="heart-icon">
                                     </button>
                                 {% endif %}

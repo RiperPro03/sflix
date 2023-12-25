@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Serie;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class HomeController extends AbstractController
 {
     private $client;
+    private String $urlSearchAPI = 'http://127.0.0.1:8000/';
 
     public function __construct(HttpClientInterface $client)
     {
@@ -25,7 +27,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         try {
-            $response = $this->client->request('GET', 'http://127.0.0.1:8000/all_series/', [
+            $response = $this->client->request('GET', $this->urlSearchAPI . 'all_series/', [
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
@@ -57,7 +59,7 @@ class HomeController extends AbstractController
 
         if (!empty($searchQuery)) {
             try {
-                $response = $this->client->request('GET', 'http://127.0.0.1:8000/search/', [
+                $response = $this->client->request('GET', $this->urlSearchAPI . '/search/', [
                     'headers' => [
                         'Accept' => 'application/json',
                     ],

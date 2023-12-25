@@ -20,7 +20,7 @@
                         <a class="btn btn-outline-primary" href="{{ path('app_home') }}">Catalogue</a>
                     </div>
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn btn-outline-primary dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ app.user.userIdentifier }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -37,7 +37,7 @@
 
     <div class="container mt-4">
         <div class="row">
-            {% if likedSeriesTitles is empty %}
+            {% if likedSeries is empty %}
                 <div class="col-12">
                     <div class="alert alert-info" role="alert">
                        Vous n'avez mis aucune serie en favoris.
@@ -45,16 +45,19 @@
                     </div>
                 </div>
             {% else %}
-                <h2>Vos Séries Favorite <small>({{ likedSeriesTitles|length }})</small></h2>
-                {% for serie_title in likedSeriesTitles %}
-                    {% set image_filename = serie_title ~ '.jpg' %}
+                <h2>Vos Séries Favorites <small>({{ likedSeries|length }})</small></h2>
+                {% for serie in likedSeries %}
+                    {% set serie_title = serie.title %}
                     <div class="col-md-3 col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="image-container position-relative">
-                                <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
+                                <img src="{{ asset(serie.img) }}" class="card-img-top" alt="{{ serie_title }}">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">{{ serie_title }}</h5>
+                                <button type="button" class="btn btn-danger" data-title="{{ serie_title }}" onclick="toggleLikeSerieAndRefresh(this)">
+                                    Supprimer
+                                </button>
                             </div>
                         </div>
                     </div>
