@@ -60,21 +60,20 @@ class FavoriteController extends AbstractController
         }
 
         $serieRandom = [];
-        $serieRandom2=[];
+        $serieRandom2 = [];
+        $nomserieR1 = [];
+        $nomserieR2 = [];
 
-        $nomserieR1 ="";
-        $nomserieR2 ="";
-        if (count($likedSeriesTitles)>2) {
-            $nombreRandom = rand(0 ,count($likedSeriesTitles)-1);
-           
+        if (count($likedSeriesTitles) > 2) {
+            $randomIndices = array_rand($likedSeriesTitles, 2);
+            $nomserieR1 = $likedSeriesTitles[$randomIndices[0]];
+            $nomserieR2 = $likedSeriesTitles[$randomIndices[1]];
 
-            $nomserieR1 = $likedSeriesTitles[$nombreRandom];
-            $nomserieR2 = $likedSeriesTitles[($nombreRandom+1)%(count($likedSeriesTitles)-1)];
-            
-            array_push($serieRandom,$nomserieR1);
-            array_push($serieRandom2 ,$nomserieR2);
+            $serieRandom = [$nomserieR1];
+            $serieRandom2 = [$nomserieR2];
         }
-        
+
+
 
         try {
             $response = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/', [
@@ -91,7 +90,7 @@ class FavoriteController extends AbstractController
         }
 
         try {
-            $responseR1 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/', [
+            $responseR1 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/?top_n=6', [
                 'json' => [
                     'series_list' => $serieRandom,
                 ],
@@ -105,7 +104,7 @@ class FavoriteController extends AbstractController
         }
 
         try {
-            $responseR2 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/', [
+            $responseR2 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/?top_n=6', [
                 'json' => [
                     'series_list' => $serieRandom2,
                 ],
@@ -122,9 +121,9 @@ class FavoriteController extends AbstractController
         return $this->render('favorite/suggestion.html.twig', [
             'controller_name' => 'SuggestionController',
             'suggestionSeriesTitles' => $series,
-            'serieR1' => array_slice($serieR1,0,6),
+            'serieR1' => $serieR1,
             'nomserieR1'=>$nomserieR1,
-            'serieR2'=> array_slice($serieR2,0,6),
+            'serieR2'=> $serieR2,
             'nomserieR2'=>$nomserieR2,
         ]);
     }
