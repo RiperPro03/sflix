@@ -59,7 +59,7 @@ class HomeController extends AbstractController
 
         if (!empty($searchQuery)) {
             try {
-                $response = $this->client->request('GET', $this->urlSearchAPI . '/search/', [
+                $response = $this->client->request('GET', $this->urlSearchAPI . 'search/', [
                     'headers' => [
                         'Accept' => 'application/json',
                     ],

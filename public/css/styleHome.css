@@ -1,11 +1,73 @@
-.card {
-    height: 100%; /* Ceci s'assure que toutes les cartes s'étendent à la hauteur de leurs conteneurs parent */
+:root{
+--violet:#c29ffa;
+--jaune :#ffe69c;
+--vert:#a6e9d5;
+--orange :#feb272;
+--bleu :#9eeaf9;
+--gris :#f8f9fa;
 }
 
+body{
+    background-color: var(--gris);
+}
+header{
+    background-color: #212529;
+}
+.logo{
+    color: var(--jaune);
+    text-decoration: none;
+    font-weight: 600;
+}
+.menu{
+    padding-left: 20px;
+}
+
+.menu a{
+    color: white;
+    border:none;
+}
+.menu a:hover{
+    color: var(--jaune);
+}
+
+
+.bod{
+    background-color: var(--gris);
+}
+
+#scroll{
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    display: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #212529;
+    border: none;
+  }
+  #scroll img{
+    width: 60%;
+  }
+
+
+.card {
+    height: 100%;
+    background-color: #212529;
+    border: 10px solid;
+    border-color:#212529 ;
+    color: white;
+    border-radius: 10px;  
+    }
+
+.padd{
+    padding-bottom: 30px;
+}
 .card-body {
     height: calc(100% - 500px);
     overflow: hidden;
 }
+
 
 /* Overlay and clickable area styling */
 .overlay {
@@ -22,6 +84,8 @@
     transition: visibility 0s, opacity 0.5s linear; /* Smooth transition for the overlay */
     text-decoration: none;
     cursor: pointer;
+    border:none;
+    
 }
 
 .card:hover .overlay {
@@ -29,6 +93,9 @@
     opacity: 1;
 }
 
+.card:hover{
+   color: var(--jaune);
+}
 .heart-icon {
     width: 50px;
     height: auto;

@@ -8,19 +8,20 @@
 {% block title %}Sflix{% endblock %}
 
 {% block body %}
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home') }}">SFLIX</a>
-            <div class="d-flex align-items-center">
+            <a class="navbar logo" href="{{ path('app_home') }}">SFLIX</a>
+            <div class="d-flex align-items-center ">
                 {% if app.user %}
-                    <div class="nav-item">
-                        <a class="btn btn-outline-primary" href="{{ path('app_suggestion') }}">Suggestion</a>
+                    <div class="nav-item menu ">
+                        <a class="btn " href="{{ path('app_suggestion') }}">Suggestion</a>
                     </div>
-                    <div class="nav-item">
-                        <a class="btn btn-outline-primary" href="{{ path('app_favorite') }}">Mes Series</a>
+                     
+                    <div class="nav-item menu ">
+                        <a class="btn " href="{{ path('app_favorite') }}">Mes Series</a>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a class="btn btn-outline-primary dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="nav-item dropdown menu">
+                        <a class="btn dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ app.user.userIdentifier }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -33,23 +34,21 @@
 
                 {% else %}
                     <div class="nav-item">
-                        <a class="btn btn-outline-primary" href="{{ path('app_login') }}">Se Connecter</a>
+                        <a class="btn btn-primary" href="{{ path('app_login') }}">Se Connecter</a>
                     </div>
                 {% endif %}
             </div>
         </div>
     </header>
-
-    <div class="container mt-4">
+    <div class="container mt-4 bod">
         <h2>Notre Catalogue <small>({{ series|length }})</small></h2>
         <form action="/search" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" name="query" autocomplete="off" value="{{ app.request.query.get('query', '') }}">
-                <button class="btn btn-outline-secondary" type="submit">🔍</button>
+                <button class="btn btn-outline-primary" type="submit">🔍</button>
                 <a class="btn btn-outline-danger" href="{{ path('app_home') }}" role="button">Reset</a>
             </div>
         </form>
-
 
         <div class="row">
             {% if series is empty %}
@@ -62,7 +61,7 @@
                 {% for serie_title in series %}
                     {% set image_filename = serie_title ~ '.jpg' %}
                     {% set isLiked = likedSeries[serie_title] ?? false %}
-                    <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="col-md-3 col-sm-6 mb-6 padd">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
@@ -82,5 +81,8 @@
         </div>
     </div>
 
+<button type="button" id="scroll">
+  <img src="{{'img-icons/arrow-up.svg' }}" alt="fleche">
+</button>
 {% endblock %}
 

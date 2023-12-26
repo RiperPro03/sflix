@@ -8,19 +8,20 @@
 {% endblock %}
 
 {% block body %}
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home') }}">SFLIX</a>
-            <div class="d-flex align-items-center">
+            <a class="navbar logo" href="{{ path('app_home') }}">SFLIX</a>
+            <div class="d-flex align-items-center ">
                 {% if app.user %}
-                    <div class="nav-item">
-                        <a class="btn btn-outline-primary" href="{{ path('app_suggestion') }}">Suggestion</a>
+                    <div class="nav-item menu ">
+                        <a class="btn " href="{{ path('app_home') }}">Catalogue</a>
                     </div>
-                    <div class="nav-item">
-                        <a class="btn btn-outline-primary" href="{{ path('app_home') }}">Catalogue</a>
+                     
+                    <div class="nav-item menu ">
+                        <a class="btn " href="{{ path('app_suggestion') }}">Suggestion</a>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a class="btn btn-outline-primary dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="nav-item dropdown menu">
+                        <a class="btn dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ app.user.userIdentifier }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -48,7 +49,7 @@
                 <h2>Vos Séries Favorites <small>({{ likedSeries|length }})</small></h2>
                 {% for serie in likedSeries %}
                     {% set serie_title = serie.title %}
-                    <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="col-md-2 col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset(serie.img) }}" class="card-img-top" alt="{{ serie_title }}">
