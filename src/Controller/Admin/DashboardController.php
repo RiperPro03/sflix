@@ -44,7 +44,7 @@ class DashboardController extends AbstractDashboardController
             $topSeries[$key]['title'] = json_decode('"' . $serie['title'] . '"');
         }
 
-        return $this->render('admin/dashboard.html.twig', [
+        return $this->render('Admin/dashboard.html.twig', [
             'totalUsers' => $totalUsers,
             'totalSeries' => $totalSeries,
             'seriesPerUser' => $usersWithSeriesCount,
