@@ -18,15 +18,16 @@
                     </div>
                      
                     <div class="nav-item menu ">
-                        <a class="btn " href="{{ path('app_favorite') }}">Mes Series</a>
+                        <a class="btn" href="{{ path('app_favorite') }}">Mes Series</a>
                     </div>
+                    
                     <div class="nav-item dropdown menu">
                         <a class="btn dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ app.user.userIdentifier }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <li><a class="dropdown-item" href="{{ path('admin') }}">Administration</a></li>
+                                <li><a class="dropdown-item adm" href="{{ path('admin') }}">Administration</a></li>
                             {% endif %}
                             <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se Déconnecter</a></li>
                         </ul>
@@ -61,7 +62,7 @@
                 {% for serie_title in series %}
                     {% set image_filename = serie_title ~ '.jpg' %}
                     {% set isLiked = likedSeries[serie_title] ?? false %}
-                    <div class="col-md-3 col-sm-6 mb-6 padd">
+                    <div class="col-md-3 col-sm-6 mb-6 padd2">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">

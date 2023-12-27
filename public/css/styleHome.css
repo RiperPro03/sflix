@@ -23,11 +23,27 @@ header{
 }
 
 .menu a{
-    color: white;
-    border:none;
+    color: white !important;;
+    border: none;
 }
 .menu a:hover{
-    color: var(--jaune);
+    color: var(--jaune)!important;
+}
+.dropdown-menu {
+    background-color: #212529 !important;
+}
+.dropdown-menu a{
+    color: white !important;
+}
+
+.dropdown-menu a:hover{
+    color: white !important;
+}
+.dropdown-menu :hover{
+    background-color: #212529 !important;
+}
+.dropdown-menu .text-danger{
+    color: #ff3d43 !important;
 }
 
 
@@ -61,6 +77,9 @@ header{
     }
 
 .padd{
+    padding-bottom: 15px;
+}
+.padd2{
     padding-bottom: 30px;
 }
 .card-body {
@@ -93,9 +112,12 @@ header{
     opacity: 1;
 }
 
-.card:hover{
+.padd .card:hover{
    color: var(--jaune);
 }
+.padd2 .card:hover{
+    color: var(--jaune);
+ }
 .heart-icon {
     width: 50px;
     height: auto;

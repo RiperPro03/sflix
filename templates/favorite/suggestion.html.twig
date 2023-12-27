@@ -43,7 +43,7 @@
                 <h2>Parce que vous avez aimé "{{ nomserieR1 |upper}}"</h2>
                 {% for serie_titleR1 in serieR1 %}
                     {% set image_filename = serie_titleR1 ~ '.jpg' %}
-                    <div class="col-md-2       col-sm-6 mb-3">
+                    <div class="col-md-2 col-sm-6 mb-3 padd">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_titleR1 }}">
@@ -65,7 +65,7 @@
                 <h2 >Parce que vous avez aimé "{{ nomserieR2 |upper}}"</h2>
                 {% for serie_titleR2 in serieR2 %}
                     {% set image_filename = serie_titleR2 ~ '.jpg' %}
-                    <div class="col-md-2       col-sm-6 mb-3">
+                    <div class="col-md-2 col-sm-6 mb-3 padd">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_titleR2 }}">
@@ -97,7 +97,7 @@
                 {% endif %}
                 {% for serie_title in suggestionSeriesTitles %}
                     {% set image_filename = serie_title ~ '.jpg' %}
-                    <div class="col-md-2       col-sm-6 mb-3">
+                    <div class="col-md-2 col-sm-6 mb-3 padd">
                         <div class="card h-100">
                             <div class="image-container position-relative">
                                 <img src="{{ asset('img-series/' ~ image_filename) }}" class="card-img-top" alt="{{ serie_title }}">
@@ -111,6 +111,10 @@
             {% endif %}
         </div>
     </div>
+
+<button type="button" id="scroll">
+  <img src="{{'img-icons/arrow-up.svg' }}" alt="fleche">
+</button>
 {% endblock %}
 
 
