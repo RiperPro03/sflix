@@ -6,11 +6,11 @@
             <h1>Statistiques de Sflix</h1>
             <div class="stat-card">
                 <div class="stat-card__title">Total d'utilisateurs</div>
-                <div class="stat-card__number">{{ totalUsers }}</div>
+                <div class="stat-card__number">{{ totalUsers | default('Non disponible') }}</div>
             </div>
             <div class="stat-card">
                 <div class="stat-card__title">Total de séries</div>
-                <div class="stat-card__number">{{ totalSeries }}</div>
+                <div class="stat-card__number">{{ totalSeries | default('Non disponible') }}</div>
             </div>
         </div>
         
@@ -26,8 +26,8 @@
                 <tbody>
                 {% for serie in topSeries %}
                     <tr>
-                        <td>{{ serie.title }}</td>
-                        <td>{{ serie.likesCount }}</td>
+                        <td>{{ serie.title | default('Non disponible') }}</td>
+                        <td>{{ serie.likesCount | default('Non disponible') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
