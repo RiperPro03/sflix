@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -11,10 +12,12 @@ class FavoriteController extends AbstractController
 {
 
     private $client;
+    private String $urlSearchAPI;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $client, ParameterBagInterface $params)
     {
         $this->client = $client;
+        $this->urlSearchAPI = $params->get('URL_SearchAPI');
     }
     /**
      * @Route("/favorite", name="app_favorite")
@@ -76,7 +79,7 @@ class FavoriteController extends AbstractController
 
 
         try {
-            $response = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/', [
+            $response = $this->client->request('POST', $this->urlSearchAPI . 'similar_series/', [
                 'json' => [
                     'series_list' => $likedSeriesTitles,
                 ],
@@ -90,7 +93,7 @@ class FavoriteController extends AbstractController
         }
 
         try {
-            $responseR1 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/?top_n=6', [
+            $responseR1 = $this->client->request('POST', $this->urlSearchAPI . 'similar_series/?top_n=6', [
                 'json' => [
                     'series_list' => $serieRandom,
                 ],
@@ -104,7 +107,7 @@ class FavoriteController extends AbstractController
         }
 
         try {
-            $responseR2 = $this->client->request('POST', 'http://127.0.0.1:8000/similar_series/?top_n=6', [
+            $responseR2 = $this->client->request('POST', $this->urlSearchAPI . 'similar_series/?top_n=6', [
                 'json' => [
                     'series_list' => $serieRandom2,
                 ],

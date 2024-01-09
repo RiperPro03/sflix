@@ -6,6 +6,7 @@ use App\Entity\Serie;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +15,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class HomeController extends AbstractController
 {
     private $client;
-    private String $urlSearchAPI = 'http://127.0.0.1:8000/';
+    private String $urlSearchAPI;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $client, ParameterBagInterface $params)
     {
         $this->client = $client;
+        $this->urlSearchAPI = $params->get('URL_SearchAPI');
     }
 
     /**
