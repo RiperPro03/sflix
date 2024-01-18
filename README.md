@@ -41,7 +41,8 @@ composer install
 ```
 
 Modifier le fichier `.env` pour mettre le lien de votre base de données MySQL ou autre :
-ATTONTION il faut au préalable créer la Base de donnés (BD) nommé "sflix" comme dans l'exemple
+
+**ATTENTION** il faut au préalable créer la Base de données (BD) nommé "sflix" comme dans l'exemple
 
 ```bash
 ###> doctrine/doctrine-bundle ###
