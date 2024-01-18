@@ -95,3 +95,4 @@ Pour arrêter le serveur faire :
 ## Arrêter le serveur
 symfony server:stop
 ```
+Ou faire CTRL+C
