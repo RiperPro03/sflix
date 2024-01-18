@@ -36,7 +36,7 @@ cd sflix
 ```
 
 ```bash
-## Installation de toute les dépendances
+## Installation de toutes les dépendances
 composer install
 ```
 
@@ -66,10 +66,10 @@ Vous pouvez aussi changer l’adresse de l’api de recherche si vous avez confi
 URL_SearchAPI='http://127.0.0.1:8000/'
 ```
 
-Une fois les modification terminer faire une migration pour générer toute les tables dans la base de données de l’application :
+Une fois les modifications terminer faire une migration pour générer toutes les tables dans la base de données de l’application :
 
 ```bash
-## Exécutez la migration pour générer la base de données de l’application
+## Exécutez la migration pour générer toutes les tables dans la base de données de l’application
 php bin/console doctrine:migrations:migrate
 ```
 
