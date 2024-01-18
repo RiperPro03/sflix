@@ -9,14 +9,14 @@ C'est un projet universitaire avec pour sujet la réalisation d'un site vitrine 
 
 - [Vincent Noguero](https://github.com/VINKYN) [non-alternant]
 
-## Fonctionnalités
+# Fonctionnalités
 
 - **Recherche de séries** : Permet aux utilisateurs de trouver des séries en saisissant des mots-clés. Par exemple, les mots "crash", "avion", "île" retourne la série "Lost" en premiers résultats.
 - **Recommandation de séries** : Suggère des séries similaires à une liste de séries favorites d'un utilisateur.
 - **Gestion des utilisateurs** : BackOffice pour créer, modifier et supprimer des utilisateurs, et de créer, modifier et suprimer des séries favorites.
-## Installation
+# Installation
 
-### Prérequis
+## Prérequis
 
 - Symfony 5.4
 - Composer 2.6.6 +
@@ -73,7 +73,7 @@ Une fois les modification terminer faire une migration pour générer toute les 
 php bin/console doctrine:migrations:migrate
 ```
 
-### Démarrage
+## Démarrage
 
 Pour lancer le serveur web :
 
@@ -87,7 +87,7 @@ cd sflix
 symfony server:start --port=8080
 ```
 
-### Arrêt
+## Arrêt
 
 Pour arrêter le serveur faire :
 
