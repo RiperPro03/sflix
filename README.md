@@ -41,6 +41,7 @@ composer install
 ```
 
 Modifier le fichier `.env` pour mettre le lien de votre base de données MySQL ou autre :
+ATTONTION il faut au préalable créer la Base de donnés (BD) nommé "sflix" comme dans l'exemple
 
 ```bash
 ###> doctrine/doctrine-bundle ###
@@ -56,8 +57,6 @@ DATABASE_URL="mysql://root:@127.0.0.1:3306/sflix?serverVersion=8&charset=utf8mb4
 ```bash
 # URL de la base de données ce compose comme cela
 mysql://UTILISATEUR:MDP@ADRESSE/BD?serverVersion=8&charset=utf8mb4
-
-# ATTONTION il faut au préalable créer la Base de donnés (BD) nommé "sflix" comme dans l'exemple
 ```
 
 Vous pouvez aussi changer l’adresse de l’api de recherche si vous avez configurer une autre adresse pour l’API de recherche.
@@ -66,7 +65,7 @@ Vous pouvez aussi changer l’adresse de l’api de recherche si vous avez confi
 URL_SearchAPI='http://127.0.0.1:8000/'
 ```
 
-Une fois les modification terminer faire une migration pour générer la base de données de l’application :
+Une fois les modification terminer faire une migration pour générer toute les tables dans la base de données de l’application :
 
 ```bash
 ## Exécutez la migration pour générer la base de données de l’application
