@@ -73,7 +73,7 @@ Une fois les modification terminer faire une migration pour générer toute les 
 php bin/console doctrine:migrations:migrate
 ```
 
-## Démarrage
+### Démarrage
 
 Pour lancer le serveur web :
 
@@ -87,7 +87,7 @@ cd sflix
 symfony server:start --port=8080
 ```
 
-## Arrêt
+### Arrêt
 
 Pour arrêter le serveur faire :
 
