@@ -19,6 +19,7 @@ C'est un projet universitaire avec pour sujet la réalisation d'un site vitrine 
 ## Prérequis
 
 - Symfony 5.4
+- PHP 7.4
 - Composer 2.6.6 +
 - MySQL ou autre Base de données compatible.
 
